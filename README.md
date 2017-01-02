@@ -1,2 +1,2 @@
 # Playgrounds-Swift
-Swift playgrounds I made for fun
+Some Swift playgrounds I made.
