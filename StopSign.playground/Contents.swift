@@ -1,5 +1,3 @@
-//A stop sign
-
 import UIKit
 
 class Sign : UIView
