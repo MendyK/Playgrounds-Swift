@@ -1,4 +1,4 @@
-//An attempt at a stop sign using UIBezierPath
+//A stop sign
 
 import UIKit
 
@@ -17,36 +17,41 @@ class Sign : UIView
     
     override func draw(_ rect: CGRect)
     {
-        let ssPath = UIBezierPath(rect:self.bounds)
+        let ctx = UIGraphicsGetCurrentContext()
+
         let center = self.center
         let θ = M_PI_4
         let π = CGFloat(M_PI)
+        ctx?.setLineWidth(30.0)
+        UIColor.red.setFill()
         
-        ssPath.lineWidth = 30.0
-
-        ssPath.move(to: CGPoint(x: (center.x - center.x * cos(π)),
-                                y: (center.y - center.y * sin(π))))
-
+        //Rotate
+        //Make rotation happen about center of context
+        let ctxCenter = CGPoint(x: rect.midX, y: rect.midY)
+        ctx?.translateBy(x: ctxCenter.x, y: ctxCenter.y)
+        ctx?.rotate(by: CGFloat(θ / 2))
+        
+        //Go back to where we started
+        ctx?.translateBy(x: -ctxCenter.x, y: -ctxCenter.y)
+        
+        
+        ctx?.move(to: CGPoint(x: (center.x - center.x * cos(π)), y: (center.y - center.y * sin(π))))
         for i in stride(from: -M_PI, to: M_PI, by: θ){
             
             //x = center * cos(i)
             //y = center * sin(i)
             let x = center.x - (center.x * cos(CGFloat(i)))
             let y = center.y - (center.y * sin(CGFloat(i)))
-            ssPath.addLine(to: CGPoint(x: x, y: y))
             
+            ctx?.addLine(to: CGPoint(x: x, y: y))
 
         }
-        ssPath.close()
-        UIColor.white.setFill()
-        ssPath.fill()
-        ssPath.stroke()
+        ctx?.fillPath()
+        ctx?.strokePath()
     }
 }
 
-
 let stopSign = Sign(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
-
 
 
 
