@@ -72,7 +72,7 @@ print(usersArray)
 
 
 // 6. Given an array of numbers write a filter method that only selects odd integers
-let numsArray = [13,2,4,5,7,2,234,463,62,46,66,26,73,74]
+let numsArray = [13,2,4,5,7,2,234,463,62,46,66,26,73,74,524,534526,2346,27,234,5,23]
 let oddInts = numsArray.filter({ $0 % 2 != 0 } )
 oddInts
 
